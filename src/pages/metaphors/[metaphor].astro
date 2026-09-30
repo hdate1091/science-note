@@ -1,0 +1,31 @@
+---
+import Base from '../../layouts/Base.astro';
+import ArticleList from '../../components/ArticleList.astro';
+import { METAPHORS, METAPHOR_KEYS, type MetaphorKey } from '../../data/metaphors';
+import { getArticlesByMetaphor } from '../../lib/articles';
+
+export function getStaticPaths() {
+  return METAPHOR_KEYS.map((metaphor) => ({ params: { metaphor } }));
+}
+
+const key = Astro.params.metaphor as MetaphorKey;
+const m = METAPHORS[key];
+const articles = await getArticlesByMetaphor(key);
+---
+<Base title={`「${m.name}」で例えた記事`} description={m.description}>
+  <section class="container">
+    <header class="head">
+      <p class="crumb"><a href="/metaphors">たとえ図鑑</a></p>
+      <h1>「{m.name}」で例えた記事</h1>
+      <p>{m.description}</p>
+    </header>
+    <ArticleList articles={articles} />
+  </section>
+</Base>
+
+<style>
+  .head { margin: 2.5rem 0 1.5rem; padding-left: 1rem; border-left: 6px solid var(--c-crossover); }
+  h1 { margin: 0; }
+  p { margin: 0.3rem 0 0; color: var(--ink-soft); }
+  .crumb { margin: 0; font-size: 0.85rem; }
+</style>

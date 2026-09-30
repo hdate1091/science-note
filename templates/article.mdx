@@ -1,0 +1,41 @@
+---
+# ↓ このファイルをコピーして src/content/articles/<分野>/<英語のファイル名>.mdx に置きます。
+# ファイル名がそのままURLになります（例：network/ip-address.mdx → /network/ip-address）。
+title: 記事タイトル（32文字前後が目安）
+description: 検索結果に表示される説明文（80〜120文字が目安）
+field: network # network / biology / quantum / crossover のどれか
+metaphors: [logistics] # たとえ図鑑の見出し。src/data/metaphors.ts の key から選ぶ
+publishedAt: 2026-12-15
+pack: インターネットは国際物流網 # テーマパック名（なければ行ごと削除）
+order: 2 # パック内の順番
+draft: true # 公開してよくなったら false に
+references:
+  - title: 参考にした本・論文・RFCのタイトル
+    url: https://example.com
+    note: 補足（なければ行ごと削除）
+---
+
+<Summary>
+- この記事のポイント1
+- この記事のポイント2
+- この記事のポイント3
+</Summary>
+
+## 見出し
+
+本文。**太字**、[リンク](https://example.com) など、普通の Markdown が使えます。
+
+<Analogy title="〇〇で例えると">
+例え話の本文。
+</Analogy>
+
+<Figure src="/figures/network/図のファイル名.svg" alt="図の内容を文章で説明（画像が見えない人と検索エンジン向け）" caption="図の下に表示する説明" />
+
+<AuthorNote>
+現場の経験や、自分が学んだときにつまずいた点など。
+</AuthorNote>
+
+## まとめ
+
+- まとめ1
+- まとめ2

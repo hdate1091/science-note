@@ -1,0 +1,15 @@
+---
+// 図解。画像は public/figures/ 以下に置き、src="/figures/..." で指定します。
+interface Props { src: string; alt: string; caption?: string; width?: number; height?: number }
+const { src, alt, caption, width, height } = Astro.props;
+---
+<figure>
+  <img src={src} alt={alt} width={width} height={height} loading="lazy" decoding="async" />
+  {caption && <figcaption>{caption}</figcaption>}
+</figure>
+
+<style>
+  figure { margin: 2rem 0; padding: 1rem; background: #fff; border: 1px solid var(--rule); border-radius: var(--radius); }
+  img { display: block; margin: 0 auto; }
+  figcaption { margin-top: 0.6rem; font-size: 0.85rem; color: #5b6068; text-align: center; }
+</style>

@@ -1,0 +1,110 @@
+---
+import Base from './Base.astro';
+import FieldBadge from '../components/FieldBadge.astro';
+import { SITE } from '../data/site';
+import { METAPHORS } from '../data/metaphors';
+import { articleUrl, formatDate, getArticles, type Article } from '../lib/articles';
+
+interface Props { article: Article }
+const { article } = Astro.props;
+const { title, description, field, metaphors, publishedAt, updatedAt, pack, references, draft } = article.data;
+
+const all = await getArticles();
+const packArticles = pack
+  ? all.filter((a) => a.data.pack === pack).sort((a, b) => a.data.order - b.data.order)
+  : [];
+const related = all.filter((a) => a.data.field === field && a.id !== article.id && (!pack || a.data.pack !== pack)).slice(0, 3);
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: title,
+  description,
+  datePublished: publishedAt.toISOString(),
+  dateModified: (updatedAt ?? publishedAt).toISOString(),
+  author: { '@type': 'Person', name: SITE.author.name, description: SITE.author.bio },
+  publisher: { '@type': 'Organization', name: SITE.name },
+  mainEntityOfPage: new URL(articleUrl(article), Astro.site).toString(),
+};
+---
+<Base title={title} description={description} type="article">
+  <script slot="head" type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+  <article class="container">
+    <div class="measure paper">
+      <header>
+        <div class="meta">
+          <FieldBadge field={field} />
+          <time datetime={publishedAt.toISOString()}>{formatDate(publishedAt)}</time>
+          {updatedAt && <span>（更新 {formatDate(updatedAt)}）</span>}
+          {draft && <span class="draft">下書き（本番には表示されません）</span>}
+        </div>
+        <h1>{title}</h1>
+        {metaphors.length > 0 && (
+          <p class="metaphors">
+            たとえ：{metaphors.map((m) => <a href={`/metaphors/${m}`}>#{METAPHORS[m].name}</a>)}
+          </p>
+        )}
+      </header>
+
+      <div class="prose">
+        <slot />
+      </div>
+
+      {references.length > 0 && (
+        <section class="refs">
+          <h2>参考文献</h2>
+          <ol>
+            {references.map((r) => (
+              <li>
+                {r.url ? <a href={r.url} rel="noopener">{r.title}</a> : r.title}
+                {r.note && <span class="note">：{r.note}</span>}
+              </li>
+            ))}
+          </ol>
+        </section>
+      )}
+
+      {packArticles.length > 1 && (
+        <nav class="pack" aria-label="シリーズ">
+          <p class="pack-title">シリーズ「{pack}」</p>
+          <ol>
+            {packArticles.map((a) => (
+              <li>{a.id === article.id ? <strong>{a.data.title}</strong> : <a href={articleUrl(a)}>{a.data.title}</a>}</li>
+            ))}
+          </ol>
+        </nav>
+      )}
+
+      <aside class="author">
+        <p class="author-name">この記事を書いた人：{SITE.author.name}</p>
+        <p>{SITE.author.bio}</p>
+        <a href="/about">プロフィールを見る</a>
+      </aside>
+
+      {related.length > 0 && (
+        <nav class="related" aria-label="関連記事">
+          <p class="pack-title">同じ分野の記事</p>
+          <ul>{related.map((a) => <li><a href={articleUrl(a)}>{a.data.title}</a></li>)}</ul>
+        </nav>
+      )}
+    </div>
+  </article>
+</Base>
+
+<style>
+  .paper { margin-top: 2rem; background: var(--paper); border: 1px solid var(--rule); border-radius: var(--radius); padding: 1.5rem 1.25rem 2rem; }
+  @media (min-width: 640px) { .paper { padding: 2.5rem 3rem 3rem; } }
+  .meta { display: flex; flex-wrap: wrap; align-items: center; gap: 0.6rem; font-size: 0.85rem; color: var(--ink-soft); }
+  h1 { margin: 0.8rem 0 0.4rem; font-size: clamp(1.5rem, 4vw, 2rem); }
+  .metaphors { margin: 0; font-size: 0.85rem; color: var(--ink-soft); }
+  .metaphors a { margin-right: 0.6rem; }
+  .draft { font-weight: 700; color: var(--c-crossover); }
+  .refs { margin-top: 3rem; font-size: 0.9rem; }
+  .refs h2 { font-size: 1.1rem; border-bottom: 1px solid var(--rule); }
+  .note { color: var(--ink-soft); }
+  .pack, .related, .author { margin-top: 2rem; padding: 1rem 1.2rem; border-radius: var(--radius); border: 1px solid var(--rule); font-size: 0.92rem; }
+  .pack-title, .author-name { margin: 0 0 0.3rem; font-weight: 800; }
+  .pack ol, .related ul { margin: 0; padding-left: 1.3rem; }
+  .author { background: var(--paper-2); }
+  .author p { margin: 0.2rem 0; }
+</style>

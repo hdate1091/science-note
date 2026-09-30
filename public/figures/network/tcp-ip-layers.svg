@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 400" font-family="'Hiragino Sans','Noto Sans JP',sans-serif" role="img" aria-labelledby="t">
+  <title id="t">TCP/IPの4階層と、国際物流の対応</title>
+  <style>
+    .layer{stroke:#2f6fc0;stroke-width:1.5;rx:8}
+    .ln{font-size:15px;font-weight:700;fill:#23262b}
+    .ex{font-size:12px;fill:#5b6068}
+    .an{font-size:13px;fill:#9a560f;font-weight:700}
+    .hd{font-size:15px;font-weight:800;fill:#23262b}
+  </style>
+  <text x="130" y="28" text-anchor="middle" class="hd">通信の世界（送る側）</text>
+  <text x="540" y="28" text-anchor="middle" class="hd">物流の世界にたとえると</text>
+
+  <g>
+    <rect x="20" y="44" width="220" height="70" class="layer" fill="#e8f0fb"/>
+    <text x="36" y="72" class="ln">4. アプリケーション層</text>
+    <text x="36" y="94" class="ex">HTTP・メール など（中身）</text>
+    <rect x="20" y="124" width="220" height="70" class="layer" fill="#dbe7f8"/>
+    <text x="36" y="152" class="ln">3. トランスポート層</text>
+    <text x="36" y="174" class="ex">TCP・UDP、ポート番号</text>
+    <rect x="20" y="204" width="220" height="70" class="layer" fill="#cddef5"/>
+    <text x="36" y="232" class="ln">2. インターネット層</text>
+    <text x="36" y="254" class="ex">IP、IPアドレス、ルーター</text>
+    <rect x="20" y="284" width="220" height="70" class="layer" fill="#bfd4f1"/>
+    <text x="36" y="306" class="ln">1. ネットワーク</text>
+    <text x="36" y="324" class="ln">　 インターフェース層</text>
+    <text x="36" y="345" class="ex">イーサネット・光ファイバー</text>
+  </g>
+
+  <g stroke="#d27a1f" stroke-width="1.5" stroke-dasharray="5 4">
+    <line x1="248" y1="79" x2="382" y2="79"/>
+    <line x1="248" y1="159" x2="382" y2="159"/>
+    <line x1="248" y1="239" x2="382" y2="239"/>
+    <line x1="248" y1="319" x2="382" y2="319"/>
+  </g>
+
+  <g>
+    <rect x="390" y="44" width="310" height="70" rx="8" fill="#fdf1e3" stroke="#d27a1f" stroke-width="1.5"/>
+    <text x="406" y="72" class="an">荷物の中身（手紙・贈り物）</text>
+    <text x="406" y="94" class="ex">相手が読む・使うもの</text>
+    <rect x="390" y="124" width="310" height="70" rx="8" fill="#fdf1e3" stroke="#d27a1f" stroke-width="1.5"/>
+    <text x="406" y="152" class="an">送り状（部屋番号・受取人・通し番号）</text>
+    <text x="406" y="174" class="ex">建物の中の「誰宛て」か、届いたかの確認</text>
+    <rect x="390" y="204" width="310" height="70" rx="8" fill="#fdf1e3" stroke="#d27a1f" stroke-width="1.5"/>
+    <text x="406" y="232" class="an">国際住所と中継拠点の仕分け</text>
+    <text x="406" y="254" class="ex">世界中どこへでも届く住所と、行き先の判断</text>
+    <rect x="390" y="284" width="310" height="70" rx="8" fill="#fdf1e3" stroke="#d27a1f" stroke-width="1.5"/>
+    <text x="406" y="312" class="an">トラック・船・飛行機</text>
+    <text x="406" y="334" class="ex">拠点から次の拠点までの「1区間」を運ぶ</text>
+  </g>
+
+  <text x="360" y="386" text-anchor="middle" class="ex">送る側は上の層から順に「箱に入れて伝票を貼る」。受け取る側は下の層から順に開けていく。</text>
+</svg>

@@ -1,0 +1,29 @@
+---
+import Base from '../../layouts/Base.astro';
+import ArticleList from '../../components/ArticleList.astro';
+import { FIELDS, FIELD_KEYS, type FieldKey } from '../../data/fields';
+import { getArticlesByField } from '../../lib/articles';
+
+export function getStaticPaths() {
+  return FIELD_KEYS.map((field) => ({ params: { field } }));
+}
+
+const field = Astro.params.field as FieldKey;
+const f = FIELDS[field];
+const articles = await getArticlesByField(field);
+---
+<Base title={f.name} description={f.lead}>
+  <section class="container">
+    <header class="head" style={`--c: ${f.color}`}>
+      <h1>{f.name}</h1>
+      <p>{f.lead}</p>
+    </header>
+    <ArticleList articles={articles} showField={false} />
+  </section>
+</Base>
+
+<style>
+  .head { margin: 2.5rem 0 1.5rem; padding-left: 1rem; border-left: 6px solid var(--c); }
+  h1 { margin: 0; }
+  p { margin: 0.3rem 0 0; color: var(--ink-soft); }
+</style>
