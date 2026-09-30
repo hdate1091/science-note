@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 360" font-family="'Hiragino Sans','Noto Sans JP',sans-serif" role="img" aria-labelledby="t">
+  <title id="t">古典ビットは止まったコイン、量子ビットは回っているコイン</title>
+  <style>
+    .hd{font-size:17px;font-weight:800;fill:#23262b}
+    .sub{font-size:13px;fill:#5b6068}
+    .lb{font-size:14px;font-weight:700;fill:#23262b}
+    .q{font-size:14px;font-weight:700;fill:#7a4fc4}
+    .coin{stroke:#8a6d1f;stroke-width:2}
+    .face{font-size:22px;font-weight:800;fill:#6b5212}
+    .num{font-size:13px;font-weight:700;fill:#6b5212}
+  </style>
+
+  <!-- 左：古典ビット -->
+  <rect x="16" y="16" width="332" height="328" rx="10" fill="#f5f6f8" stroke="#d5d8de"/>
+  <text x="182" y="46" text-anchor="middle" class="hd">古典ビット＝止まったコイン</text>
+  <text x="182" y="68" text-anchor="middle" class="sub">いつ見ても、どちらか一方に決まっている</text>
+
+  <!-- 表のコイン -->
+  <ellipse cx="96" cy="210" rx="54" ry="22" fill="#b89a45"/>
+  <ellipse cx="96" cy="204" rx="54" ry="22" class="coin" fill="#e9cf7a"/>
+  <text x="96" y="212" text-anchor="middle" class="face">表</text>
+  <text x="96" y="262" text-anchor="middle" class="lb">表 ＝ 0</text>
+
+  <text x="182" y="212" text-anchor="middle" class="lb">または</text>
+
+  <!-- 裏のコイン -->
+  <ellipse cx="268" cy="210" rx="54" ry="22" fill="#b89a45"/>
+  <ellipse cx="268" cy="204" rx="54" ry="22" class="coin" fill="#dcc06a"/>
+  <text x="268" y="212" text-anchor="middle" class="face">裏</text>
+  <text x="268" y="262" text-anchor="middle" class="lb">裏 ＝ 1</text>
+
+  <text x="182" y="316" text-anchor="middle" class="sub">1ビットが持つのは「0か1か」の答え1つ</text>
+
+  <!-- 右：量子ビット -->
+  <rect x="372" y="16" width="332" height="328" rx="10" fill="#f3eefb" stroke="#cdbcec"/>
+  <text x="538" y="46" text-anchor="middle" class="hd">量子ビット＝回っているコイン</text>
+  <text x="538" y="68" text-anchor="middle" class="sub">回っている間は、表と裏の両方の可能性を持つ</text>
+
+  <!-- 回転の軌跡 -->
+  <g fill="none" stroke="#7a4fc4" stroke-width="2" stroke-linecap="round">
+    <path d="M478 150 A60 18 0 0 1 598 150" stroke-dasharray="6 5"/>
+    <path d="M598 238 A60 18 0 0 1 478 238" stroke-dasharray="6 5"/>
+    <path d="M592 142 l8 8 l-11 3" />
+    <path d="M484 246 l-8 -8 l11 -3" />
+  </g>
+  <!-- 立って回るコイン（横から見た姿） -->
+  <ellipse cx="538" cy="192" rx="20" ry="62" fill="#b89a45"/>
+  <ellipse cx="533" cy="192" rx="20" ry="62" class="coin" fill="#e9cf7a"/>
+    <ellipse cx="538" cy="258" rx="46" ry="6" fill="#d9cfe9"/>
+
+  <text x="430" y="188" text-anchor="middle" class="q">表の</text>
+  <text x="430" y="206" text-anchor="middle" class="q">可能性</text>
+  <text x="646" y="188" text-anchor="middle" class="q">裏の</text>
+  <text x="646" y="206" text-anchor="middle" class="q">可能性</text>
+
+  <text x="538" y="316" text-anchor="middle" class="sub">見た瞬間に、どちらか一方に決まる（第3回）</text>
+</svg>
