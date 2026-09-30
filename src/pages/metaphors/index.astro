@@ -1,0 +1,40 @@
+---
+import Base from '../../layouts/Base.astro';
+import { METAPHORS, METAPHOR_KEYS } from '../../data/metaphors';
+import { getArticlesByMetaphor } from '../../lib/articles';
+
+const entries = await Promise.all(
+  METAPHOR_KEYS.map(async (key) => ({ key, ...METAPHORS[key], count: (await getArticlesByMetaphor(key)).length })),
+);
+---
+<Base title="たとえ図鑑" description="このサイトで使っている例え話の索引です。同じ例えが、通信・生命・量子のどこで使われているかを横断して探せます。">
+  <section class="container">
+    <header class="head">
+      <h1>たとえ図鑑</h1>
+      <p>このサイトで使っている例え話の索引です。同じ例えが、通信・生命・量子のどこで使われているかを横断して探せます。</p>
+    </header>
+    <ul class="grid">
+      {entries.map((e) => (
+        <li>
+          <a href={`/metaphors/${e.key}`}>
+            <span class="name">{e.name}</span>
+            <span class="count">{e.count}本</span>
+          </a>
+          <p>{e.description}</p>
+        </li>
+      ))}
+    </ul>
+  </section>
+</Base>
+
+<style>
+  .head { margin: 2.5rem 0 1.5rem; padding-left: 1rem; border-left: 6px solid var(--c-crossover); }
+  h1 { margin: 0; }
+  .head p { margin: 0.3rem 0 0; color: var(--ink-soft); }
+  .grid { list-style: none; padding: 0; margin: 0; display: grid; gap: 1rem; grid-template-columns: repeat(auto-fill, minmax(min(100%, 15rem), 1fr)); }
+  li { background: var(--paper); border: 1px solid var(--rule); border-radius: var(--radius); padding: 0.9rem 1.1rem; }
+  a { display: flex; justify-content: space-between; align-items: baseline; text-decoration: none; }
+  .name { font-weight: 800; font-size: 1.1rem; color: var(--ink); }
+  .count { font-size: 0.8rem; color: var(--ink-soft); }
+  li p { margin: 0.3rem 0 0; font-size: 0.88rem; color: var(--ink-soft); line-height: 1.6; }
+</style>

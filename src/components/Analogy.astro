@@ -1,0 +1,16 @@
+---
+// 記事内で使う「たとえると」ボックス。
+// 使い方（.mdx）: <Analogy title="物流で例えると">本文</Analogy>
+interface Props { title?: string }
+const { title = 'たとえると' } = Astro.props;
+---
+<aside class="analogy">
+  <p class="label">💡 {title}</p>
+  <div class="body"><slot /></div>
+</aside>
+
+<style>
+  .analogy { margin: 1.8rem 0; padding: 1rem 1.2rem; border-radius: var(--radius); background: color-mix(in srgb, var(--c-crossover) 9%, var(--paper)); border: 1.5px dashed color-mix(in srgb, var(--c-crossover) 55%, transparent); }
+  .label { margin: 0 0 0.3rem; font-weight: 800; color: var(--c-crossover); font-size: 0.95rem; }
+  .body :global(p) { margin: 0.5rem 0; }
+</style>

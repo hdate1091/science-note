@@ -1,0 +1,14 @@
+---
+import ArticleCard from './ArticleCard.astro';
+import type { Article } from '../lib/articles';
+interface Props { articles: Article[]; showField?: boolean; empty?: string }
+const { articles, showField = true, empty = 'まだ記事がありません。準備中です。' } = Astro.props;
+---
+{articles.length === 0
+  ? <p class="empty">{empty}</p>
+  : <div class="list">{articles.map((a) => <ArticleCard article={a} showField={showField} />)}</div>}
+
+<style>
+  .list { display: grid; gap: 1rem; grid-template-columns: repeat(auto-fill, minmax(min(100%, 19rem), 1fr)); }
+  .empty { color: var(--ink-soft); }
+</style>

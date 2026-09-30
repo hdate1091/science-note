@@ -1,0 +1,23 @@
+---
+import { SITE } from '../data/site';
+const year = new Date().getFullYear();
+---
+<footer class="site-footer">
+  <div class="container inner">
+    <ul>
+      <li><a href="/about">このサイトについて</a></li>
+      <li><a href="/privacy">プライバシーポリシー</a></li>
+      <li><a href="/contact">お問い合わせ</a></li>
+      <li><a href="/rss.xml">RSS</a></li>
+    </ul>
+    <p>© {year} {SITE.name}（{SITE.nameEn}）</p>
+  </div>
+</footer>
+
+<style>
+  .site-footer { margin-top: 5rem; border-top: 1px solid var(--rule); background: var(--paper); font-size: 0.88rem; color: var(--ink-soft); }
+  .inner { padding-top: 1.5rem; padding-bottom: 2rem; }
+  ul { display: flex; flex-wrap: wrap; gap: 0.25rem 1.25rem; list-style: none; margin: 0 0 0.75rem; padding: 0; }
+  a { color: var(--ink-soft); }
+  p { margin: 0; }
+</style>

@@ -1,0 +1,16 @@
+---
+// 「筆者のひとこと」。現場の経験や、実際に学んだときにつまずいた点などを書く欄です。
+import { SITE } from '../data/site';
+---
+<aside class="note">
+  <p class="label">✍️ 筆者のひとこと</p>
+  <div class="body"><slot /></div>
+  <p class="sig">— {SITE.author.name}</p>
+</aside>
+
+<style>
+  .note { margin: 2rem 0; padding: 1rem 1.2rem; border-radius: var(--radius); background: var(--paper-2); border-left: 4px solid var(--accent); }
+  .label { margin: 0; font-weight: 800; font-size: 0.95rem; }
+  .body :global(p) { margin: 0.5rem 0; }
+  .sig { margin: 0.3rem 0 0; text-align: right; font-size: 0.85rem; color: var(--ink-soft); }
+</style>

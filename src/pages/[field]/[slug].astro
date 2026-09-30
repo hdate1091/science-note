@@ -1,0 +1,23 @@
+---
+import { render } from 'astro:content';
+import ArticleLayout from '../../layouts/ArticleLayout.astro';
+import Analogy from '../../components/Analogy.astro';
+import AuthorNote from '../../components/AuthorNote.astro';
+import Summary from '../../components/Summary.astro';
+import Figure from '../../components/Figure.astro';
+import { getArticles, type Article } from '../../lib/articles';
+
+export async function getStaticPaths() {
+  const articles = await getArticles();
+  return articles.map((article) => ({
+    params: { field: article.data.field, slug: article.id.split('/').pop() },
+    props: { article },
+  }));
+}
+
+const { article } = Astro.props as { article: Article };
+const { Content } = await render(article);
+---
+<ArticleLayout article={article}>
+  <Content components={{ Analogy, AuthorNote, Summary, Figure }} />
+</ArticleLayout>

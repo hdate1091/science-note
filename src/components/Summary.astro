@@ -1,0 +1,15 @@
+---
+// 記事冒頭の「この記事のポイント」。
+interface Props { title?: string }
+const { title = 'この記事のポイント' } = Astro.props;
+---
+<aside class="summary">
+  <p class="label">{title}</p>
+  <slot />
+</aside>
+
+<style>
+  .summary { margin: 1.5rem 0 2rem; padding: 0.9rem 1.2rem; border: 1.5px solid var(--rule); border-radius: var(--radius); background: var(--paper); }
+  .label { margin: 0; font-weight: 800; font-size: 0.95rem; }
+  .summary :global(ul) { margin: 0.4rem 0 0; padding-left: 1.3rem; }
+</style>
